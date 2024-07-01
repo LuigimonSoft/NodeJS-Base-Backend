@@ -9,7 +9,8 @@ import swaggerUi from 'swagger-ui-express';
 
 
 import { errorHandler } from './middleware/errorHandler';
-import baseRoutes from './routes/baseRoutes';
+import { BaseRoutes } from './routes/baseRoutes';
+import { configureDI } from './infrastructure/configureDI';
 
 dotenv.config({ path: __dirname + '/.env' });
 const app = express();
@@ -41,13 +42,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(bodyParser.json());
 
-app.use(apiPrefix, baseRoutes);
+const container = configureDI();
+app.use(apiPrefix, BaseRoutes(container));
 
-/*app.use(express.static(path.join(__dirname, '../frontend/dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '../frontend/dist/index.html'));
-});
-*/
+//app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 app.use(errorHandler);
 
