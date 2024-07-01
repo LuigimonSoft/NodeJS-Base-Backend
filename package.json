@@ -1,0 +1,47 @@
+{
+  "name": "nodejs-base-backend",
+  "version": "1.0.0",
+  "description": "This project aims to create a base structure for various backend projects using NodeJS and TypeScript. It provides a foundational framework to kickstart any backend server implementation in NodeJS, streamlining the setup process and ensuring a consistent starting point. Includes essential configurations, best practices, and scalable architecture.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "test": "NODE_ENV=test&vitest",
+    "test:watch": "NODE_ENV=test&vitest --watch",
+    "test:coverage": "NODE_ENV=test&vitest --coverage",
+    "dev": "SET NODE_ENV=development& ts-node-dev --respawn --transpile-only src/index.ts",
+    "start": "SET NODE_ENV=production& ts-node --respawn --transpile-only src/index.ts",
+    "build": "tsc"
+  },
+  "author": "Luis Carlos Carrillo",
+  "license": "ISC",
+  "dependencies": {
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "path": "^0.12.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.2",
+    "@types/sinon": "^17.0.3",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1",
+    "sinon": "^18.0.0",
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}
