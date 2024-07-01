@@ -12,7 +12,7 @@ export function errorHandler(err: any, req: Request, res: Response, next: NextFu
     errorsResult.push(err as CustomError);
   } else
     errorsResult = err as CustomError[];
-
-  console.log(`[Errors]`, { errorsResult });
+  if (process.env.NODE_ENV === 'development')
+    console.log(`[Errors]`, { errorsResult });
   res.status(errorsResult[0].status || 500).json(errorsResult);
 }
