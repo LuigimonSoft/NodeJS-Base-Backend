@@ -1,0 +1,40 @@
+name: Node.js verify PR
+
+on:
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  backend:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: Install dependences
+      run: npm install
+      working-directory: ./
+
+    - name: Build backend
+      run: npm run build --if-present
+      working-directory: ./
+
+    - name: Run ESLint
+      run: npm run lint
+      working-directory: ./
+
+    - name: Run test
+      run: npm run test
+      working-directory: ./
+      

@@ -7,6 +7,7 @@ export enum typeErrors {
   VALIDATION_ERROR = 'ValidationError',
   CUSTOM_ERROR = 'CustomError',
   UNKNOWN_ERROR = 'UnknownError',
+  INFRASTRUCTURE_ERROR = 'InfrastructureError',
 }
 
 export class CustomError extends Error {
