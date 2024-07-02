@@ -1,4 +1,7 @@
 export enum ErrorCode {
+  REQUIRED = 1001,
+  EMPTY = 1002,
+  MAX_LENGTH = 1003,
   INVALID_JSON_FORMAT = 1013,
   UNEXPECTED_JSON_FORMAT = 1014,
   DATABASE_ERROR = 4001,
@@ -7,6 +10,18 @@ export enum ErrorCode {
 }
 
 export const errorDetails = {
+  [ErrorCode.REQUIRED]: {
+    httpStatus: 400,
+    message: 'The field is required'
+  },
+  [ErrorCode.EMPTY]: {
+    httpStatus: 400,
+    message: 'The field cannot be empty'
+  },
+  [ErrorCode.MAX_LENGTH]: {
+    httpStatus: 400,
+    message: 'The field must be less than 35 characters'
+  },
   [ErrorCode.INVALID_JSON_FORMAT]: {
     httpStatus: 400,
     message: 'Invalid JSON format'
