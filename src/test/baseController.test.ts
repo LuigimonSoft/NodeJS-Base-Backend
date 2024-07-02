@@ -1,12 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Request, Response } from 'express';
-import { baseController } from '../controllers/baseController';
+import { BaseController } from '../controllers/baseController';
 import { IBaseService } from '../services/interfaces/IBaseService';
 import { CustomError } from '../utils/customError';
-import { ErrorCode } from '../utils/errorCodes';
 
 describe('baseController', () => {
-  let controller: baseController;
+  let controller: BaseController;
   let mockService: IBaseService;
   let mockRequest: Partial<Request>;
   let mockResponse: Partial<Response>;
@@ -17,7 +16,7 @@ describe('baseController', () => {
       getMessage: vi.fn(),
       setMessage: vi.fn(),
     };
-    controller = new baseController(mockService);
+    controller = new BaseController(mockService);
 
     mockRequest = {};
     mockResponse = {

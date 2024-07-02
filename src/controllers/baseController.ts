@@ -6,7 +6,7 @@ import { IBaseService } from '../services/interfaces/IBaseService';
 import { setMessageValidator } from '../validators/baseValidator';
 
 
-export class baseController {
+export class BaseController {
   constructor(private baseService: IBaseService) { }
   
   public async getMessage(req: Request, res: Response, next: NextFunction): Promise<void> {
