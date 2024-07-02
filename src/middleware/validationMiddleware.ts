@@ -7,13 +7,21 @@ type ValidationRule = {
   errorCode: number;
 };
 
+enum typeParameters {
+  BODY = 'body',
+  QUERY = 'query',
+  PARAMS = 'params'
+}
+
 class ValidationChain {
   private field: string;
   private rules: ValidationRule[];
+  private typeParameter: typeParameters;
 
-  constructor(field: string) {
+  constructor(field: string, typeParameter: typeParameters) {
     this.field = field;
     this.rules = [];
+    this.typeParameter = typeParameter;
   }
 
   notNull() {
@@ -62,9 +70,15 @@ class ValidationChain {
   getRules() {
     return this.rules;
   }
+
+  getTypeParameter(): typeParameters {
+    return this.typeParameter;
+  }
 }
 
-export const body = (field: string) => new ValidationChain(field);
+export const body = (field: string) => new ValidationChain(field, typeParameters.BODY);
+export const query = (field: string) => new ValidationChain(field, typeParameters.QUERY);
+export const params = (field: string) => new ValidationChain(field, typeParameters.PARAMS);
 
 export function validateRequest(validators: ValidationChain[]) {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -73,7 +87,7 @@ export function validateRequest(validators: ValidationChain[]) {
     const errorsResult: CustomError[] = [];
 
     validators.forEach(validator => {
-      const value = req.body[validator.getField()] || req.params[validator.getField()] || req.query[validator.getField()];
+      const value = (validator.getTypeParameter() === typeParameters.BODY) ? req.body[validator.getField()] : (validator.getTypeParameter() === typeParameters.PARAMS)? req.params[validator.getField()] : req.query[validator.getField()];
 
       validator.getRules().forEach(rule => {
         if (!rule.validate(value)) {
