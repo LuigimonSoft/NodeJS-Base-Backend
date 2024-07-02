@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "commonjs",
+    "module": "ES2015",
+    "moduleResolution": "Bundler",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
   "files": ["src/types/di.d.ts"],
   "include": ["src/**/*.ts", "src/**/*.d.ts"],
